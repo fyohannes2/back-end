@@ -64,7 +64,6 @@ exports.signup = async (req, res) => {
 };
 
 exports.signin = async (req, res) => {
-  // console.log(req.body);
   try {
     const { email, password } = req.body;
     // check if our db has user with that email
@@ -116,7 +115,7 @@ exports.forgotPassword = async (req, res) => {
     from: process.env.EMAIL_FROM,
     to: user.email,
     subject: "Password reset code",
-    html: "<h1>Your password  reset code is: {resetCode}</h1>",
+    html: `<h1>Your password  reset code is: ${resetCode}</h1>`,
   };
   // send email
   try {
@@ -150,6 +149,15 @@ exports.resetPassword = async (req, res) => {
     user.resetCode = "";
     user.save();
     return res.json({ ok: true });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const currentUser = async (req, res) => {
+  try {
+    // const user = await User.findById(req.user._id);
+    res.json({ ok: true });
   } catch (err) {
     console.log(err);
   }
