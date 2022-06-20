@@ -1,10 +1,11 @@
 //ENTRY POINT OF SERVER
 //when server is spinned, this file is executed. 
 require("dotenv").config();
-import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
-import authRoutes from "./routes/auth";
+const express = require("express");
+const cors = require("cors");
+const mongoose = require("mongoose");
+const authRoutes = require("./routes/auth");
+
 
 const morgan = require("morgan");
 
@@ -31,4 +32,6 @@ app.use(morgan("dev"));
 //prefix with /api/ 
 app.use("/api", authRoutes);
 
-app.listen(8000, () => console.log("Server running on port 8000"));
+const port = process.env.PORT || 8000;
+
+http.listen(port, () => console.log("Server running on port 8000"));
